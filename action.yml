@@ -1,0 +1,28 @@
+name: metricview-lint
+description: Lint Databricks Unity Catalog metric view YAML and annotate pull requests
+branding:
+  icon: check-square
+  color: orange
+inputs:
+  paths:
+    description: Space-separated files or directories to lint
+    default: "."
+  args:
+    description: Extra arguments, e.g. "--disable MV201 --warnings-as-errors"
+    default: ""
+  version:
+    description: metricview-lint version to install (default latest)
+    default: ""
+runs:
+  using: composite
+  steps:
+    - uses: astral-sh/setup-uv@v6
+    - shell: bash
+      env:
+        MVL_VERSION: ${{ inputs.version }}
+        MVL_PATHS: ${{ inputs.paths }}
+        MVL_ARGS: ${{ inputs.args }}
+      run: |
+        spec="metricview-lint${MVL_VERSION:+==$MVL_VERSION}"
+        # shellcheck disable=SC2086
+        uvx --from "$spec" metricview-lint --format github $MVL_ARGS $MVL_PATHS

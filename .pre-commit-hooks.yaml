@@ -1,0 +1,8 @@
+- id: metricview-lint
+  name: metricview-lint
+  description: Lint Databricks Unity Catalog metric view YAML
+  entry: metricview-lint
+  language: python
+  files: \.(ya?ml|sql)$
+  # YAML files without a top-level source/fields/measures key are skipped,
+  # so this is safe to run over a whole repository.

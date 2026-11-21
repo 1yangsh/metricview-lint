@@ -1,0 +1,33 @@
+# Each block below is a mistake metricview-lint catches before deployment.
+version: 1.1
+source: main.commerce.orders
+
+joins:
+  - name: customer
+    source: main.commerce.customers
+    on: customer_id = customer_id          # MV406: always true, both sides are the joined table
+
+fields:
+  - name: Revenue                          # MV203: 'revenue' below collides (case-insensitive)
+    expr: amount
+  - name: order_date
+    expr: CAST(ordered_at AS DATE)
+
+measures:
+  - name: revenue
+    expr: SUM(amount)
+  - name: margin
+    expr: amount - cost                    # MV302: a measure must aggregate
+  - name: aov
+    expr: MEASURE(revenue) / MEASURE(orders)   # MV305: 'orders' is defined later
+  - name: orders
+    expr: COUNT(1)
+  - name: running_total
+    expr: SUM(amount) OVER (ORDER BY ordered_at)   # MV304: use a window spec instead
+  - name: revenue_7d
+    expr: MEASURE(revenue)
+    window:
+      - order: ordered_at                  # MV503: must be a field name (order_date)
+        range: last 7 days                 # MV502: use 'trailing 7 day'
+    format:
+      type: currency                       # MV601: currency_code is required
