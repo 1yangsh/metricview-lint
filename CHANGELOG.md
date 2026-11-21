@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 (unreleased)
+
+- JSON Schema for editor autocompletion (`schemas/databricks-metric-view.json`, `--print-schema`), submitted to SchemaStore for `*.metric_view.yaml`.
+- MCP Registry metadata (`server.json`).
+
 ## 0.1.0 (2026-11-22)
 
 - First release: 43 rules covering structure, names, expressions, joins, window measures, `format` metadata, materialization and parameters.

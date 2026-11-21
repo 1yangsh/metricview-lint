@@ -47,6 +47,16 @@ Tools exposed:
 
 The same command works in any MCP client (Claude Desktop, Cursor, ...).
 
+## Editor autocompletion (JSON Schema)
+
+Name your files `*.metric_view.yaml` (or `*.metric-view.yaml`). VS Code (with the Red Hat YAML extension), JetBrains IDEs and Neovim then pick up the schema from [SchemaStore](https://www.schemastore.org) and give you key completion, hover docs and type checks while you type. For any other file name, add this first line:
+
+```yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/1yangsh/metricview-lint/main/schemas/databricks-metric-view.json
+```
+
+The schema is lenient on purpose: it helps you write the file, and `metricview-lint` checks it. `metricview-lint --print-schema` prints it.
+
 ## pre-commit
 
 ```yaml

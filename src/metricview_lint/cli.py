@@ -54,6 +54,11 @@ def _build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="lint every YAML file; by default YAML without source/fields/measures is skipped",
     )
+    parser.add_argument(
+        "--print-schema",
+        action="store_true",
+        help="print the JSON Schema for editor autocompletion and exit",
+    )
     parser.add_argument("--list-rules", action="store_true", help="print all rules and exit")
     parser.add_argument("--mcp", action="store_true", help="run as an MCP server over stdio")
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
@@ -67,6 +72,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         from .mcp_server import run
 
         run()
+        return 0
+
+    if args.print_schema:
+        from .schema import dumps
+
+        sys.stdout.write(dumps())
         return 0
 
     if args.list_rules:

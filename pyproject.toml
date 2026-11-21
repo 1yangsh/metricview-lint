@@ -1,6 +1,6 @@
 [project]
 name = "metricview-lint"
-version = "0.1.0"
+version = "0.1.1"
 description = "Offline linter and MCP server for Databricks Unity Catalog metric view YAML"
 readme = "README.md"
 authors = [
@@ -33,6 +33,7 @@ build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
+    "jsonschema>=4.23",
     "pyright>=1.1.414",
     "pytest>=9.2.0",
     "ruff>=0.17.6",
