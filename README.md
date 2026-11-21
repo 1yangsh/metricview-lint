@@ -1,5 +1,7 @@
 # metricview-lint
 
+<!-- mcp-name: io.github.1yangsh/metricview-lint -->
+
 Catch mistakes in **Databricks Unity Catalog metric view** definitions before you deploy them, in your editor, in CI, or while a coding agent like Claude Code writes them.
 
 ```text
