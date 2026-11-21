@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.1 (unreleased)
+## 0.1.1 (2026-11-22)
 
 - JSON Schema for editor autocompletion (`schemas/databricks-metric-view.json`, `--print-schema`), submitted to SchemaStore for `*.metric_view.yaml`.
 - MCP Registry metadata (`server.json`).
